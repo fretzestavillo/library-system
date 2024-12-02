@@ -13,10 +13,7 @@ export function Home() {
   const [lbsList, setlbsList] = useState<ReceivedBookData[]>([]);
 
   useEffect(() => {
-    const items = localStorage.getItem('lbsStorageList');
-    if (items) {
-      setlbsList(JSON.parse(items));
-    }
+    getList();
   }, []);
 
   const getList = async () => {
@@ -24,7 +21,7 @@ export function Home() {
     const response = await fetch(`${baseUrl}lbs`);
     const result = await response.json();
     console.log(result, typeof result, ' here I am');
-    localStorage.setItem('lbsStorageList', JSON.stringify(result));
+    setlbsList(result);
   };
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
@@ -38,7 +35,7 @@ export function Home() {
     });
 
     const result = await response.json();
-    getList();
+    await getList();
   };
 
   const {
@@ -60,7 +57,7 @@ export function Home() {
       if (!response.ok) {
         throw new Error('Request failed with status ' + response.status);
       }
-      getList();
+      await getList();
       console.log('Deleted successfully');
     } catch (error) {
       console.error('Error deleting item:', error);
