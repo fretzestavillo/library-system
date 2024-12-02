@@ -3,7 +3,9 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "dev": "npx nx run web:serve"
+        "dev-f": "npx nx run web:serve",
+        "dev-b": "npx nx run backend:serve --configuration=development",
+        "prod-b": "npx nx run backend:serve --configuration=production"
     },
     "private": true,
     "dependencies": {
@@ -18,9 +20,12 @@
         "@nestjs/platform-express": "^10.0.2",
         "@nestjs/typeorm": "^10.0.2",
         "axios": "^1.6.0",
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.14.1",
         "pg": "^8.13.1",
         "react": "18.3.1",
         "react-dom": "18.3.1",
+        "react-hook-form": "^7.53.2",
         "reflect-metadata": "^0.1.13",
         "rxjs": "^7.8.0",
         "styled-components": "^6.1.13",

@@ -2,11 +2,18 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class LBSEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    nullable: true,
-  })
-  date: string;
+  @Column()
+  bookName: string;
+
+  @Column()
+  bookAuthor: string;
+
+  @Column()
+  bookPages: string;
+
+  @Column()
+  bookPrice: string;
 }
