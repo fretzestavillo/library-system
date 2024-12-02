@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, set } from 'react-hook-form';
-import { IFormInputs, ReceivedBookData } from '../tools/type';
+import { IFormInputs, IssueButtonData, ReceivedBookData } from '../tools/type';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -20,7 +20,6 @@ export function Home() {
     const baseUrl = 'http://localhost:3000/api/';
     const response = await fetch(`${baseUrl}lbs`);
     const result = await response.json();
-    console.log(result, typeof result, ' here I am');
     setlbsList(result);
   };
 
@@ -64,6 +63,24 @@ export function Home() {
     }
   }
 
+  async function statusButton(id: string, statusButton: string) {
+    const data: IssueButtonData = {
+      bookAvailability: 'not available',
+      statusButton: statusButton,
+    };
+
+    const baseUrl = 'http://localhost:3000/api/';
+    const response = await fetch(`${baseUrl}lbs?id=${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    await getList();
+  }
+
   return (
     <>
       <h1>All Books</h1>
@@ -76,15 +93,26 @@ export function Home() {
                 <div>Book Author: {book.bookAuthor}</div>
                 <div>Book Pages: {book.bookPages}</div>
                 <div>Book Price: {book.bookPrice}</div>
-                <div>Book Availability: Available</div>
-                <div>Issue: Issue</div>
+                <div>Book Availability: {book.bookAvailability}</div>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  size="small"
+                  startIcon={<KeyboardReturnIcon />}
+                  onClick={() => statusButton(book.id, 'ISSUED')}
+                  disabled={book.statusButton === 'ISSUED' ? true : false}
+                >
+                  {book.statusButton}
+                </Button>
                 <Button
                   variant="outlined"
                   color="success"
                   size="small"
                   startIcon={<KeyboardReturnIcon />}
+                  onClick={() => statusButton(book.id, 'ISSUE')}
+                  disabled={book.statusButton === 'ISSUE' ? true : false}
                 >
-                  Return
+                  RETURN
                 </Button>
                 <Button
                   onClick={() => deleteButton(book.id)}

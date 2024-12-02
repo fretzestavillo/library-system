@@ -4,11 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Query,
 } from '@nestjs/common';
 import { LBSService } from './lbs.service';
-import { LBSInput } from '../tools/lbs.type';
+import { LBSInput, LBSStatus } from '../tools/lbs.type';
 import { LBSEntity } from '../tools/lbs.entity';
 
 @Controller('lbs')
@@ -28,5 +29,10 @@ export class LBSController {
   @Delete()
   deleteById(@Query('id') id: string): Promise<void> {
     return this.lbsService.deleteById(id);
+  }
+
+  @Patch()
+  updateLbsStatus(@Query('id') id: string, @Body() lbsStatus: LBSStatus) {
+    return this.lbsService.updateLbsStatus(id, lbsStatus);
   }
 }

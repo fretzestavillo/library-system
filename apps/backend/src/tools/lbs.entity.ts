@@ -1,9 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class LBSEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @CreateDateColumn()
+  created_at: Date;
 
   @Column()
   bookName: string;
@@ -16,4 +24,10 @@ export class LBSEntity {
 
   @Column()
   bookPrice: string;
+
+  @Column()
+  bookAvailability: string;
+
+  @Column()
+  statusButton: string;
 }

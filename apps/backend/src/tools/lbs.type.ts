@@ -13,3 +13,10 @@ export class LBSInput {
   @IsString()
   bookPrice: string;
 }
+
+export class LBSStatus {
+  @IsString()
+  bookAvailability: string;
+  @IsString()
+  statusButton: string;
+}

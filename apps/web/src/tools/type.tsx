@@ -11,4 +11,11 @@ export interface ReceivedBookData {
   bookAuthor: string;
   bookPages: string;
   bookPrice: string;
+  bookAvailability: string;
+  statusButton: string;
+}
+
+export interface IssueButtonData {
+  bookAvailability: string;
+  statusButton: string;
 }
