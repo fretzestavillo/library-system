@@ -3,9 +3,10 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "dev-f": "npx nx run web:serve",
-        "dev-b": "npx nx run backend:serve --configuration=development",
-        "prod-b": "npx nx run backend:serve --configuration=production"
+        "frontend-development": "npx nx run web:serve",
+        "frontend-build": "nx run web:build",
+        "backend-development": "npx nx run backend:serve --configuration=development",
+        "backend-production": "npx nx run backend:serve --configuration=production"
     },
     "private": true,
     "dependencies": {
